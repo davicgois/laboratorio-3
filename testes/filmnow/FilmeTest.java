@@ -21,7 +21,7 @@ public class FilmeTest {
     void getNome() {
         assert filme.getNome().equals("Avatar");
     }
-
+//teste
     @Test
     void getAno() {
         assert filme.getAno().equals("2009");
