@@ -50,6 +50,9 @@ public class MainFilmNow {
                         + "(H)Atribuir Hot\n"
                         + "(R)Remover Hot\n"
                         + "(S)Sair\n"
+                        + "(A)Adicionar filme\n"
+                        + "(C) Adicionar local\n"
+                        + "(L)Remover Local\n"
                         + "\n"
                         + "Opção> ");
         if (!scanner.hasNextLine()) {
@@ -88,6 +91,11 @@ public class MainFilmNow {
             case "S":
                 sai();
                 break;
+
+            case "L":
+
+            case "C":
+
             default:
                 throw new IllegalArgumentException("OPÇÃO INVÁLIDA!");
         }
@@ -206,5 +214,12 @@ public class MainFilmNow {
         LeitorFilmNow leitor = new LeitorFilmNow();
         int carregados = leitor.carregaContatos(arquivoFilmes, fn);
         System.out.println("Carregamos " + carregados + " registros.");
+    }
+
+    private static void adicionaLocal(FilmNow fn, String filme, String localNovo) {
+        for (int m = 0; m < fn.getArrFilmes.length; m++) {
+            for (int i = 0; i < ; i++) {
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 package filmnow;
+import java.util.Arrays;
 
 /**
  * Sistema que mantém os seus filmes prediletos. Podem existir até 100 filmes,
@@ -25,7 +26,7 @@ public class FilmNow {
     /**
      * Lista de filmes.
      */
-    public Filme[] filmes;
+    private Filme[] filmes;
 
     /**
      * HotList. Guarda referências aos mesmos objetos de {@code filmes}.
@@ -224,5 +225,9 @@ public class FilmNow {
                 this.hotList[i] = null;
             }
         }
+    }
+
+    private String[] getArrFilmes(){
+        return new String[]{Arrays.toString(filmes)};
     }
 }
