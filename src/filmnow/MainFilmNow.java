@@ -49,10 +49,9 @@ public class MainFilmNow {
                         + "(E)Exibir HotList\n"
                         + "(H)Atribuir Hot\n"
                         + "(R)Remover Hot\n"
+                        + "(C)Adicionar local\n"
+                        + "(L)Remover local\n"
                         + "(S)Sair\n"
-                        + "(A)Adicionar filme\n"
-                        + "(C) Adicionar local\n"
-                        + "(L)Remover Local\n"
                         + "\n"
                         + "Opção> ");
         if (!scanner.hasNextLine()) {
@@ -64,8 +63,8 @@ public class MainFilmNow {
     /**
      * Usa a opção escolhida pelo usuário.
      *
-     * @param opcao   Opção digitada.
-     * @param fn      O sistema FilmNow que estamos manipulando.
+     * @param opcao Opção digitada.
+     * @param fn O sistema FilmNow que estamos usando
      * @param scanner Scanner para o caso do comando precisar de mais entrada.
      */
     private static void comando(String opcao, FilmNow fn, Scanner scanner) {
@@ -88,16 +87,17 @@ public class MainFilmNow {
             case "R":
                 removerHot(fn, scanner);
                 break;
+            case "C":
+                adicionarLocal(fn, scanner);
+                break;
+            case "L":
+                removerLocal(fn, scanner);
+                break;
             case "S":
                 sai();
                 break;
-
-            case "L":
-
-            case "C":
-
             default:
-                throw new IllegalArgumentException("OPÇÃO INVÁLIDA!");
+                System.out.println("OPÇÃO INVÁLIDA!");
         }
     }
 
@@ -115,11 +115,7 @@ public class MainFilmNow {
         String ano = scanner.nextLine();
         System.out.print("Local> ");
         String local = scanner.nextLine();
-        if (nome.isBlank() || ano.isBlank() || local.isBlank()) {
-            throw new NullPointerException("Parametro invalido");
-        } else {
-            System.out.println(fn.cadastraFilme(posicao, nome, ano, local));
-        }
+        System.out.println(fn.cadastraFilme(posicao, nome, ano, local));
     }
 
     /**
@@ -216,10 +212,28 @@ public class MainFilmNow {
         System.out.println("Carregamos " + carregados + " registros.");
     }
 
-    private static void adicionaLocal(FilmNow fn, String filme, String localNovo) {
-        for (int m = 0; m < fn.getArrFilmes.length; m++) {
-            for (int i = 0; i < ; i++) {
-            }
-        }
+    /**
+     * Adiciona um novo local a um filme, passando a posição do filme e o local
+     *
+     * @param fn O sistema FilmNow a ser manipulado.
+     */
+    private static void adicionarLocal(FilmNow fn, Scanner scanner) {
+        int posicao = leInteiro(scanner, "Filme> ");
+        System.out.print("Local> ");
+        String local = scanner.nextLine();
+        System.out.println(fn.adicionaLocal(posicao, local));
+    }
+
+    /**
+     * Remove um local de um filme
+     *
+     * @param fn O sistema FilmNow a ser manipulado.
+     * @param scanner Scanner para capturar a posição e o local.
+     */
+    private static void removerLocal(FilmNow fn, Scanner scanner) {
+        int posicao = leInteiro(scanner, "Filme> ");
+        System.out.print("Local> ");
+        String local = scanner.nextLine();
+        System.out.println(fn.removeLocal(posicao, local));
     }
 }
