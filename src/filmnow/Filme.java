@@ -1,4 +1,5 @@
 package filmnow;
+import java.util.Arrays;
 
 /**
  * Representação de um filme (ou série) no sistema FilmNow.
@@ -24,7 +25,8 @@ public class Filme {
     /**
      * Local onde o filme pode ser assistido
      */
-    private String local;
+    private String[] local;
+    private int ilocal = 1;
 
     /**
      * Cria um filme a partir do seu nome, ano de lançamento e local.
@@ -36,7 +38,8 @@ public class Filme {
     public Filme(String nome, String ano, String local) {
         this.nome = nome;
         this.ano = ano;
-        this.local = local;
+        this.local = new String[5];
+        this.local[0] = local;
     }
 
     /**
@@ -63,7 +66,7 @@ public class Filme {
      * @return O local do filme.
      */
     public String getLocal() {
-        return this.local;
+        return Arrays.toString(local);
     }
 
     /**
@@ -76,10 +79,23 @@ public class Filme {
         return this.toString() + "\n" + this.local;
     }
 
+    public void adicionaLocal(String novoLocal){
+        this.local[ilocal] = novoLocal;
+        ilocal++;
+    }
+
+    public void removeLocal(String antigoLocal){
+        for (int m = 0; m < local.length; m++){
+            if (local[m].equals(antigoLocal)){
+                local[m] = null;
+            }
+        }
+    }
+
     /**
      * Gera a representação textual do filme.
      *
-     * @return O filme no formato "nome, ano".
+     * @return O filme "nome, ano".
      */
     @Override
     public String toString() {
@@ -90,7 +106,6 @@ public class Filme {
      * Verifica se este filme é igual a outro objeto. Dois filmes são iguais se
      * tiverem o mesmo nome e o mesmo ano de lançamento.
      *
-     * @param o Objeto a ser comparado.
      * @return true se o objeto for um Filme com mesmo nome e ano, false caso nao sejam iguas
      */
     @Override
@@ -108,7 +123,7 @@ public class Filme {
     /**
      * Gera o código hash do filme
      *
-     * @return O código hash do filme.
+     * @return O código hash
      */
     @Override
     public int hashCode() {

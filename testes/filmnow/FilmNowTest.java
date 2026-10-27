@@ -11,6 +11,7 @@ class FilmNowTest {
     private FilmNow fn;
     private Filme filme;
     private Filme[] hotList;
+    private Filme[] filmes = new Filme[100];
 
 
 
@@ -46,13 +47,19 @@ class FilmNowTest {
 
     @Test
     void atribuiHot() {
+        fn.cadastraFilme(0, "Avatar", "2009", "Disney +");
+        assert fn.atribuiHot(0,0).equals("ADICIONADO À HOTLIST NA POSIÇÃO 1!");
     }
 
     @Test
     void removeHot() {
+        fn.cadastraFilme(0, "Avatar", "2009", "Disney +");
+        assert fn.removeHot(0).equals("");
     }
 
     @Test
     void exibeHotList() {
+        fn.cadastraFilme(0, "Avatar", "2009", "Disney +");
+        assert fn.exibeHotList().equals("1 - ");
     }
 }

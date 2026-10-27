@@ -25,7 +25,7 @@ public class FilmNow {
     /**
      * Lista de filmes.
      */
-    private Filme[] filmes;
+    public Filme[] filmes;
 
     /**
      * HotList. Guarda referências aos mesmos objetos de {@code filmes}.
@@ -52,15 +52,15 @@ public class FilmNow {
      */
     public String cadastraFilme(int posicao, String nome, String ano, String local) {
         if (!posicaoValida(posicao, TAMANHO)) {
-            return "POSIÇÃO INVÁLIDA";
+            throw new IllegalArgumentException("POSIÇÃO INVÁLIDA!");
         }
         if (nome == null || nome.trim().isEmpty() || local == null || local.trim().isEmpty()) {
-            return "FILME INVALIDO";
+            throw new IllegalArgumentException("FILME INVALIDO!");
         }
 
         Filme novo = new Filme(nome, ano, local);
         if (existeFilme(novo)) {
-            return "FILME JA ADICIONADO";
+            throw new IllegalArgumentException("FILME JA ADICIONADO!");
         }
 
         Filme antigo = this.filmes[posicao - 1];
@@ -98,7 +98,7 @@ public class FilmNow {
      */
     public String detalhaFilme(int posicao) {
         if (!existeFilmeNaPosicao(posicao)) {
-            return "POSIÇÃO INVÁLIDA!";
+            throw new IllegalArgumentException("POSIÇÃO INVÁLIDA!");
         }
 
         Filme filme = this.filmes[posicao - 1];
@@ -116,7 +116,7 @@ public class FilmNow {
      * vezes na HotList.
      *
      * @param posicaoFilme Posição do filme na lista de filmes (1 a 100).
-     * @param posicaoHot   Posição na HotList (1 a 10).
+     * @param posicaoHot Posição na HotList (1 a 10).
      * @return A mensagem com o resultado da operação.
      */
     public String atribuiHot(int posicaoFilme, int posicaoHot) {
@@ -126,7 +126,7 @@ public class FilmNow {
 
         Filme filme = this.filmes[posicaoFilme - 1];
         if (estaNaHotList(filme)) {
-            return "FILME JA ESTA NA HOTLIST!";
+            throw new IllegalArgumentException("FILME JA ESTA NA HOTLIST!");
         }
         this.hotList[posicaoHot - 1] = filme;
         return "ADICIONADO À HOTLIST NA POSIÇÃO " + posicaoHot + "!";

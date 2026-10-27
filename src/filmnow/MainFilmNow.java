@@ -61,8 +61,8 @@ public class MainFilmNow {
     /**
      * Usa a opção escolhida pelo usuário.
      *
-     * @param opcao Opção digitada.
-     * @param fn O sistema FilmNow que estamos manipulando.
+     * @param opcao   Opção digitada.
+     * @param fn      O sistema FilmNow que estamos manipulando.
      * @param scanner Scanner para o caso do comando precisar de mais entrada.
      */
     private static void comando(String opcao, FilmNow fn, Scanner scanner) {
@@ -89,14 +89,14 @@ public class MainFilmNow {
                 sai();
                 break;
             default:
-                System.out.println("OPÇÃO INVÁLIDA!");
+                throw new IllegalArgumentException("OPÇÃO INVÁLIDA!");
         }
     }
 
     /**
      * Cadastra um filme no sistema passando posição, nome, ano e local.
      *
-     * @param fn O sistema FilmNow a ser manipulado.
+     * @param fn      O sistema FilmNow a ser manipulado.
      * @param scanner Scanner para pedir as informações do filme.
      */
     private static void adicionaFilme(FilmNow fn, Scanner scanner) {
@@ -107,7 +107,11 @@ public class MainFilmNow {
         String ano = scanner.nextLine();
         System.out.print("Local> ");
         String local = scanner.nextLine();
-        System.out.println(fn.cadastraFilme(posicao, nome, ano, local));
+        if (nome.isBlank() || ano.isBlank() || local.isBlank()) {
+            throw new NullPointerException("Parametro invalido");
+        } else {
+            System.out.println(fn.cadastraFilme(posicao, nome, ano, local));
+        }
     }
 
     /**
@@ -131,7 +135,7 @@ public class MainFilmNow {
     }
 
     /**
-     *mostra os filmes da HotList.
+     * mostra os filmes da HotList.
      *
      * @param fn O sistema FilmNow a ser manipulado.
      */
@@ -143,7 +147,7 @@ public class MainFilmNow {
      * Coloca um filme na HotList, pedindo a posição do filme e a posição na
      * HotList.
      *
-     * @param fn O sistema FilmNow a ser usado
+     * @param fn      O sistema FilmNow a ser usado
      * @param scanner Scanner para capturar as posições.
      */
     private static void atribuirHot(FilmNow fn, Scanner scanner) {
@@ -155,7 +159,7 @@ public class MainFilmNow {
     /**
      * Remove um filme da HotList
      *
-     * @param fn O sistema FilmNow a ser manipulado.
+     * @param fn      O sistema FilmNow a ser manipulado.
      * @param scanner Scanner para capturar a posição.
      */
     private static void removerHot(FilmNow fn, Scanner scanner) {
@@ -182,7 +186,6 @@ public class MainFilmNow {
             return -1;
         }
     }
-
 
 
     private static void sai() {

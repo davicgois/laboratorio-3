@@ -1,6 +1,8 @@
 package filmnow;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class FilmeTest {
@@ -21,7 +23,7 @@ public class FilmeTest {
     void getNome() {
         assert filme.getNome().equals("Avatar");
     }
-//teste
+
     @Test
     void getAno() {
         assert filme.getAno().equals("2009");
@@ -46,6 +48,16 @@ public class FilmeTest {
     void testEquals() {
         Filme filme2 = new Filme("Vingadores", "2023", "Disney +");
         assert filme.toString().equals(filme2.toString());
+    }
+
+    @Test
+    public void testNomeNull() {
+        try {
+            Filme filmeInvalido = new Filme(null, "2009", "Disney+");
+            fail("Uma exceção era esperada ao passar nome nulo");
+        } catch (NullPointerException npe) {
+            assertEquals("FILME NULO", npe.getMessage());
+        }
     }
 
 }
